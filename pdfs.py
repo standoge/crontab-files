@@ -1,7 +1,8 @@
 import os
 
 workspace = "/mnt/c/Users/kevin/Downloads"
-files = "/mnt/c/Users/kevin/Downloads/files"
+files = "/mnt/c/Users/kevin/Downloads/pdfs"
+exec_cm = "-exec mv {}"
 
 def recolect():
 	with os.scandir(workspace) as sentinel:
@@ -10,7 +11,8 @@ def recolect():
 
 
 def move_dir(name):
-	os.system(f"mv {name} {files}")
+	os.system(f"l | grep .pdf | {exec_cm} {files} '\'")
+
 
 
 def main():
