@@ -1,22 +1,22 @@
 import os
+import shutil
 
 workspace = "/mnt/c/Users/kevin/Downloads"
-files = "/mnt/c/Users/kevin/Downloads/pdfs"
-exec_cm = "-exec mv {}"
+files = "/mnt/c/Users/kevin/Downloads/files"
 
-def recolect():
+def recollect():
 	with os.scandir(workspace) as sentinel:
 		for e in sentinel:
-			move_dir(e.name) if e.is_file() else print(f"dxr -> {e.name}") 
+			move_dir(e) if e.is_file() else print(f"dxr -> {e.name}") 
 
 
-def move_dir(name):
-	os.system(f"l | grep .pdf | {exec_cm} {files} '\'")
+def move_dir(file):
+	shutil.move(file.path , files)
 
 
 
 def main():
-    recolect()
+	recollect()
 
 
 if __name__ == '__main__':
