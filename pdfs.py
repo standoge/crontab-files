@@ -1,8 +1,10 @@
 import os
 import shutil
+import re
 
 workspace = "/mnt/c/Users/kevin/Downloads"
 files = "/mnt/c/Users/kevin/Downloads/files"
+pattern = re.compile(r"[a-z]*(\.pdf)")
 
 def recollect():
 	with os.scandir(workspace) as sentinel:
@@ -12,7 +14,6 @@ def recollect():
 
 def move_dir(file):
 	shutil.move(file.path , files)
-
 
 
 def main():
