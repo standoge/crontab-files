@@ -21,7 +21,6 @@ def make_log():
     os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print("dir already exist")
     log_file_path = f"{LOGS_PATH}/log-{date.today()}"
     os.system(f"cd {LOGS_PATH} && touch log-{date.today()}") if not os.path.exists(log_file_path) else print("file already exist")
-    # print(log_file_path)
     return log_file_path
 
 
@@ -46,7 +45,6 @@ def move_dir(file):
 
 def main():
     recollect()
-    # make_log()
 
 
 if __name__ == '__main__':
