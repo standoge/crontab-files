@@ -1,6 +1,6 @@
 import os
 import re
-from datetime import date
+import datetime
 
 WORKSPACE = "/mnt/c/Users/kevin/Downloads"
 FILES = "/mnt/c/Users/kevin/Downloads/micelaneus"
@@ -18,9 +18,9 @@ def recollect():
 
 def make_log():
     LOGS_PATH = f"{WORKSPACE}/logs"
-    os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print("dir already exist")
-    log_file_path = f"{LOGS_PATH}/log-{date.today()}"
-    os.system(f"cd {LOGS_PATH} && touch log-{date.today()}") if not os.path.exists(log_file_path) else print("file already exist")
+    os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print("logs_dir already exist")
+    log_file_path = f"{LOGS_PATH}/log-{datetime.date.today()}"
+    os.system(f"cd {LOGS_PATH} && touch log-{datetime.date.today()}") if not os.path.exists(log_file_path) else print("logs file already exist")
     return log_file_path
 
 
@@ -32,7 +32,7 @@ def move_dir(file):
     if one:
 		# shutil.move(file.path, pdf)
         os.rename(file.path, PDF + '/' + file.name)
-        os.system(f"echo {file.path} to {PDF} >> {log_path}")
+        os.system(f"echo {file.path} moved to {PDF} >> {log_path} {datetime.datetime.now()}")
 
     elif two:
         # shutil.move(file.path, imgs)
@@ -42,9 +42,20 @@ def move_dir(file):
         print(one)
     # 	shutil.move(file.path , files)
 
+def make_snapshots():
+    os.mkdir(f"{WORKSPACE}/logs/snapshots") if not os.path.exists(f"{WORKSPACE}/logs/snapshots") else print("snapshots already exist")
+    snapshot = os.listdir(f"{WORKSPACE}")
+    os.system(f"echo {snapshot} >> {WORKSPACE}/logs/snapshots/snapshot-{datetime.date.today()}")
+
 
 def main():
-    recollect()
+
+    try:
+        recollect()
+    except:
+        print("something was wrong to start")
+    finally:
+        make_snapshots()
 
 
 if __name__ == '__main__':
