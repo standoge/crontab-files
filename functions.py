@@ -13,40 +13,54 @@ IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg)")
 
 
 def recollect():
+    """Filter between files and directories using WORKSPACE const value as path
+	   also is this const is used as relative path to make others paths to logs 
+	   and snapshots.
+	"""
+
     with os.scandir(WORKSPACE) as sentinel:
         for e in sentinel:
-            move_dir(e) if e.is_file() else print(f"directory -> {e.name}")
+            move_dir(e) if e.is_file() else print(f"dir -> {e.name}")
 
 
 def make_log():
-    os.mkdir(LOGS_PATH) if not os.path.exists(
-        LOGS_PATH) else print("logs_dir already exist")
-    log_file_path = f"{LOGS_PATH}/log-{datetime.date.today()}"
-    os.system(f"cd {LOGS_PATH} && touch log-{datetime.date.today()}") if not os.path.exists(
-        log_file_path) else print("logs file already exist")
-    return log_file_path
+	"""Return logs_file_path 
+	   Use it as destiny for each move operation file creates directory for logs 
+	   files and also create these files, each one has the date when was created.
+	"""
+
+	os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print("Directory for logs already exist")
+	logs_file_path = f"{LOGS_PATH}/log-{datetime.date.today()}"
+	os.system(
+		f"cd {LOGS_PATH} && touch log-{datetime.date.today()}") if not os.path.exists(logs_file_path) else print("File for logs already exist")
+	return logs_file_path
+
+
+def rename_print(file_source,file_name,logs, file_destiny):
+	"""Using os.rename move files renaming them and then make a log to have a register
+	   for the files moved and where was moved also adding date and hours when this was.
+	"""
+
+	os.rename(file_source, file_destiny + "/" + file_name)
+	os.system(
+		f"echo {file_source} move to {file_destiny} >> {logs} {datetime.datetime.now()}")
+	
 
 
 def move_dir(file):
-    log_path = make_log()
-    one = re.search(PDF_PATTERN, file.name)
-    two = re.search(IMG_PATTERN, file.name)
+	"""Filter where goes each file using RegExp to know their extension
+	"""
 
-    if one:
-        os.rename(file.path, PDF + '/' + file.name)
-        os.system(
-            f"echo {file.path} moved to {PDF} >> {log_path} {datetime.datetime.now()}")
+	log_path = make_log()
 
-    elif two:
-        os.rename(file.path, IMGS + '/' + file.name)
-        os.system(
-            f"echo {file.path} moved to {IMGS} >> {log_path} {datetime.datetime.now()}")
+	if re.search(PDF_PATTERN, file.name):
+		rename_print(file.path,file.name,log_path,PDF)
 
-    else:
-        os.rename(file.path, FILES + '/' + file.name)
-        os.system(
-            f"echo {file.path} moved to {FILES} >> {log_path} {datetime.datetime.now()}")
+	elif re.search(IMG_PATTERN, file.name):
+		rename_print(file.path,file.name,log_path,IMGS)
 
+	else:
+		rename_print(file.path,file.name,log_path,FILES)
 
 def make_snapshots():
     os.mkdir(SNAPSHOTS) if not os.path.exists(
