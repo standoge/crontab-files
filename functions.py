@@ -23,7 +23,7 @@ def recollect():
             move_dir(e) if e.is_file() else print(f"dir -> {e.name}")
 
 
-def make_log():
+def log():
 	"""Return logs_file_path 
 	   Use it as destiny for each move operation file creates directory for logs 
 	   files and also create these files, each one has the date when was created.
@@ -51,7 +51,7 @@ def move_dir(file):
 	"""Filter where goes each file using RegExp to know their extension
 	"""
 
-	log_path = make_log()
+	log_path = log()
 
 	if re.search(PDF_PATTERN, file.name):
 		rename_print(file.path,file.name,log_path,PDF)
@@ -62,9 +62,12 @@ def move_dir(file):
 	else:
 		rename_print(file.path,file.name,log_path,FILES)
 
-def make_snapshots():
-    os.mkdir(SNAPSHOTS) if not os.path.exists(
-        SNAPSHOTS) else print("snapshots already exist")
-    snapshot = os.listdir(f"{WORKSPACE}")
-    os.system(
-        f"echo {snapshot} {datetime.datetime.now()}  >> {SNAPSHOTS}/snapshot-{datetime.date.today()}")
+def snapshot():
+	"""List directories in workspace after the files was moved regarding they extension.
+	   Then, we can see the state of workspace after to be filtered.
+	"""
+
+	os.mkdir(SNAPSHOTS) if not os.path.exists(SNAPSHOTS) else print("Snapshot directory already exist")
+	snapshot_dir = os.listdir(f"{WORKSPACE}")
+	os.system(
+        f"echo {snapshot_dir} {datetime.datetime.now()}  >> {SNAPSHOTS}/snapshot-{datetime.date.today()}")

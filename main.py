@@ -1,4 +1,4 @@
-from functions import recollect, make_snapshots
+from functions import recollect, snapshot
 
 def main():
 
@@ -7,8 +7,7 @@ def main():
     except:
         print("something was wrong to start, check recollect function")
     finally:
-        make_snapshots()
-
+        snapshot()
 
 if __name__ == '__main__':
     main()
