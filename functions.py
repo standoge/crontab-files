@@ -2,10 +2,10 @@ import os
 import re
 import datetime
 
-WORKSPACE = "/mnt/c/Users/kevin/Downloads"
-FILES = "/mnt/c/Users/kevin/Downloads/miscellaneous"
-PDF = "/mnt/c/Users/kevin/Downloads/pdfs"
-IMGS = "/mnt/c/Users/kevin/Downloads/images"
+WORKSPACE = "/mnt/c/Users/your_user/Downloads"
+FILES = "/mnt/c/Users/your_user/Downloads/miscellaneous"
+PDF = "/mnt/c/Users/your_user/Downloads/pdfs"
+IMGS = "/mnt/c/Users/your_user/Downloads/images"
 LOGS_PATH = f"{WORKSPACE}/logs"
 SNAPSHOTS = f"{WORKSPACE}/logs/snapshots"
 PDF_PATTERN = re.compile(r"[a-z\ ]*(\.pdf)")
@@ -13,8 +13,8 @@ IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg)")
 
 
 def recollect():
-    """Filter between files and directories using WORKSPACE const value as path
-	   also is this const is used as relative path to make others paths to logs 
+    """Filter between files and directories using const WORKSPACE value as path
+	   also this const is used as relative path to make others paths to logs 
 	   and snapshots.
 	"""
 
@@ -25,8 +25,8 @@ def recollect():
 
 def log():
 	"""Return logs_file_path 
-	   Use it as destiny for each move operation file creates directory for logs 
-	   files and also create these files, each one has the date when was created.
+	   Use it as destiny for each moves operation file creating a directory for logs 
+	   files and also creating these files, each one has the date when was created.
 	"""
 
 	os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print("Directory for logs already exist")
@@ -37,7 +37,7 @@ def log():
 
 
 def rename_print(file_source,file_name,logs, file_destiny):
-	"""Using os.rename move files renaming them and then make a log to have a register
+	"""Using os.rename to move files renaming them and then make a log to have a register
 	   for the files moved and where was moved also adding date and hours when this was.
 	"""
 
@@ -48,7 +48,7 @@ def rename_print(file_source,file_name,logs, file_destiny):
 
 
 def move_dir(file):
-	"""Filter where goes each file using RegExp to know their extension
+	"""Filter where goes each file using RegExp patterns to know their extension
 	"""
 
 	log_path = log()
@@ -64,7 +64,7 @@ def move_dir(file):
 
 def snapshot():
 	"""List directories in workspace after the files was moved regarding they extension.
-	   Then, we can see the state of workspace after to be filtered.
+	   Then, we can see the state of workspace after to be filtered and cleanned.
 	"""
 
 	os.mkdir(SNAPSHOTS) if not os.path.exists(SNAPSHOTS) else print("Snapshot directory already exist")
