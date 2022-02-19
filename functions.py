@@ -11,6 +11,15 @@ SNAPSHOTS = f"{WORKSPACE}/logs/snapshots"
 PDF_PATTERN = re.compile(r"[a-z\ ]*(\.pdf)")
 IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg)")
 
+def directories():
+    """Creates directories to move all files that will be filtered in workspace
+       path  
+    """
+
+    os.mkdir("miscellaneous") if not os.path.exists(FILES) else print("Miscellaneous already exist")
+    os.mkdir("pdfs") if not os.path.exists(FILES) else print("Pdfs already exist")
+    os.mkdir("images") if not os.path.exists(FILES) else print("Images already exist")
+
 
 def recollect():
     """Filter between files and directories using const WORKSPACE value as path
@@ -52,6 +61,7 @@ def move_dir(file):
 	"""
 
 	log_path = log()
+    directories()
 
 	if re.search(PDF_PATTERN, file.name):
 		rename_print(file.path,file.name,log_path,PDF)
