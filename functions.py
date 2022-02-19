@@ -23,7 +23,7 @@ def directories():
     os.mkdir(IMGS) if not os.path.exists(IMGS) else print("Images already exist")
 
 
-def recollect():
+def filter():
     """Filter between files and directories using const WORKSPACE value as path
 	   also this const is used as relative path to make others paths to logs 
 	   and snapshots.
@@ -31,7 +31,7 @@ def recollect():
 
     with os.scandir(WORKSPACE) as sentinel:
         for e in sentinel:
-            move_dir(e) if e.is_file() else print(f"dir -> {e.name}")
+            router(e) if e.is_file() else print(f"dir -> {e.name}")
 
 
 def log():
@@ -46,7 +46,7 @@ def log():
 	return logs_file_path
 
 
-def rename_print(file_source,file_name,logs, file_destiny):
+def rename_log(file_source,file_name,logs, file_destiny):
 	"""Using os.rename to move files renaming them and then make a log to have a register
 	   for the files moved and where was moved also adding date and hours when this was.
 	"""
@@ -57,7 +57,7 @@ def rename_print(file_source,file_name,logs, file_destiny):
 	
 
 
-def move_dir(file):
+def router(file):
 	"""Filter where goes each file using RegExp patterns to know their extension
 	"""
 
@@ -65,13 +65,13 @@ def move_dir(file):
 	log_path = log()
 
 	if re.search(PDF_PATTERN, file.name):
-		rename_print(file.path,file.name,log_path,PDF)
+		rename_log(file.path,file.name,log_path,PDF)
 
 	elif re.search(IMG_PATTERN, file.name):
-		rename_print(file.path,file.name,log_path,IMGS)
+		rename_log(file.path,file.name,log_path,IMGS)
 
 	else:
-		rename_print(file.path,file.name,log_path,FILES)
+		rename_log(file.path,file.name,log_path,FILES)
 
 def snapshot():
 	"""List directories in workspace after the files was moved regarding they extension.

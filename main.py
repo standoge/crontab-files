@@ -1,9 +1,9 @@
-from functions import recollect, snapshot
+from functions import filter, snapshot
 
 def main():
 
     try:
-        recollect()
+        filter()
     except:
         print("Something was wrong to start, check recollect function")
     finally:
