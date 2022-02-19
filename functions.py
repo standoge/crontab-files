@@ -2,23 +2,25 @@ import os
 import re
 import datetime
 
-WORKSPACE = "/mnt/c/Users/your_user/Downloads"
-FILES = "/mnt/c/Users/your_user/Downloads/miscellaneous"
-PDF = "/mnt/c/Users/your_user/Downloads/pdfs"
-IMGS = "/mnt/c/Users/your_user/Downloads/images"
+WORKSPACE = "/home/standoge/Descargas"
+FILES = f"{WORKSPACE}/miscellaneous"
+PDF = f"{WORKSPACE}/pdfs"
+IMGS = f"{WORKSPACE}/images"
 LOGS_PATH = f"{WORKSPACE}/logs"
 SNAPSHOTS = f"{WORKSPACE}/logs/snapshots"
 PDF_PATTERN = re.compile(r"[a-z\ ]*(\.pdf)")
-IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg)")
+IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg|\.mp4)")
 
 def directories():
     """Creates directories to move all files that will be filtered in workspace
        path  
     """
 
-    os.mkdir("miscellaneous") if not os.path.exists(FILES) else print("Miscellaneous already exist")
-    os.mkdir("pdfs") if not os.path.exists(FILES) else print("Pdfs already exist")
-    os.mkdir("images") if not os.path.exists(FILES) else print("Images already exist")
+    os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print("Logs directory already exist")
+    os.mkdir(SNAPSHOTS) if not os.path.exists(SNAPSHOTS) else print("Snapshot already exist")
+    os.mkdir(FILES) if not os.path.exists(FILES) else print("Miscellaneous already exist")
+    os.mkdir(PDF) if not os.path.exists(PDF) else print("Pdfs already exist")
+    os.mkdir(IMGS) if not os.path.exists(IMGS) else print("Images already exist")
 
 
 def recollect():
@@ -38,7 +40,6 @@ def log():
 	   files and also creating these files, each one has the date when was created.
 	"""
 
-	os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print("Directory for logs already exist")
 	logs_file_path = f"{LOGS_PATH}/log-{datetime.date.today()}"
 	os.system(
 		f"cd {LOGS_PATH} && touch log-{datetime.date.today()}") if not os.path.exists(logs_file_path) else print("File for logs already exist")
@@ -60,8 +61,8 @@ def move_dir(file):
 	"""Filter where goes each file using RegExp patterns to know their extension
 	"""
 
+	directories()
 	log_path = log()
-    directories()
 
 	if re.search(PDF_PATTERN, file.name):
 		rename_print(file.path,file.name,log_path,PDF)
@@ -77,7 +78,6 @@ def snapshot():
 	   Then, we can see the state of workspace after to be filtered and cleanned.
 	"""
 
-	os.mkdir(SNAPSHOTS) if not os.path.exists(SNAPSHOTS) else print("Snapshot directory already exist")
 	snapshot_dir = os.listdir(f"{WORKSPACE}")
 	os.system(
         f"echo {snapshot_dir} {datetime.datetime.now()}  >> {SNAPSHOTS}/snapshot-{datetime.date.today()}")
