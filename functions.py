@@ -53,7 +53,7 @@ def rename_print(file_source,file_name,logs, file_destiny):
 
 	os.rename(file_source, file_destiny + "/" + file_name)
 	os.system(
-		f"echo {file_source} move to {file_destiny} >> {logs} {datetime.datetime.now()}")
+		f"echo {file_source} moved to {file_destiny} >> {logs} {datetime.datetime.now()}")
 	
 
 

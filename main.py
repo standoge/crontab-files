@@ -5,7 +5,7 @@ def main():
     try:
         recollect()
     except:
-        print("something was wrong to start, check recollect function")
+        print("Something was wrong to start, check recollect function")
     finally:
         snapshot()
 
