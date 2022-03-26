@@ -1,5 +1,6 @@
 from functions import filter, snapshot
 
+
 def main():
 
     try:
@@ -9,5 +10,6 @@ def main():
     finally:
         snapshot()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
