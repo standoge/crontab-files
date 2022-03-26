@@ -12,7 +12,7 @@ All logs of day are saved at a same file. This file also have the date when was 
 ![](https://i.imgur.com/r2dYfJy.png)
 
 ## Snapshots:
-These are other folder added, the functionality is make a "capture" in workspace path to know how left it with which files or directories. LIke a "second prove" to know what files which moved.
+These are others folders added, the functionality is make a "capture" in workspace path to know how left it with which files or directories. LIke a "second prove" to know what files which moved.
 
 ![](https://i.imgur.com/eYm7HxR.png)
 
