@@ -2,7 +2,7 @@ import os
 import re
 import datetime
 
-WORKSPACE = "/mnt/c/Users/kevin/Downloads"
+WORKSPACE = "/home/standoge/Descargas"
 FILES = f"{WORKSPACE}/miscellaneous"
 PDF = f"{WORKSPACE}/pdfs"
 IMGS = f"{WORKSPACE}/images"
