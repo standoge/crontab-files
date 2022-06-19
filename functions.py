@@ -14,7 +14,7 @@ IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg|\.mp4)")
 
 def directories() -> None:
     """Creates directories to move all files that will be filtered in workspace
-    path
+    path.
     """
 
     os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print(
@@ -60,10 +60,10 @@ def rename_log(file_source:str, file_name:str, logs:str, file_destiny:str) -> No
     for the files moved and where was moved also adding date and hours when this was.
 
     Parameters:
-    file_source (str): file's origin path
-    file_name (str): file's name
-    logs(str): log's file name
-    file_destiny(str): path where the file would be moved
+    file_source (str): file's origin path.
+    file_name (str): file's name.
+    logs(str): log's file name.
+    file_destiny(str): path where the file would be moved.
     """
 
     os.rename(file_source, file_destiny + "/" + file_name)
@@ -74,10 +74,10 @@ def rename_log(file_source:str, file_name:str, logs:str, file_destiny:str) -> No
 
 def router(file:object) -> None:
     """
-    Filter where goes each file using RegExp patterns to know their extension
+    Filter where goes each file using RegExp patterns to know their extension.
 
     Parameters:
-    file(object): Output from <scandir> function
+    file(object): Output from <scandir> function.
     """
 
     directories()
@@ -100,5 +100,6 @@ def snapshot() -> None:
 
     snapshot_dir: str = os.listdir(f"{WORKSPACE}")
     os.system(
-        f"echo {snapshot_dir} {datetime.datetime.now()}  >> {SNAPSHOTS}/snapshot-{datetime.date.today()}"
+        f"echo {snapshot_dir} {datetime.datetime.now()}  
+        >> {SNAPSHOTS}/snapshot-{datetime.date.today()}"
     )
