@@ -22,4 +22,4 @@ It makes a "capture" in workspace path to know how left it after movement operat
 
 ![](https://i.imgur.com/eYm7HxR.png)
 
-Enjoy :bamboo:
+Enjoy ~ :bamboo:
