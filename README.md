@@ -8,8 +8,11 @@ Script will work on the directory that their path are in `WORKSPACE` variable. S
 python3 (py3 on Windows) main.py
 ```
 
-### Directories:
+### |-- Directories:
 The script creates three directories, one for documents, other for images & videos and other for miscellaneous files. 
+
+### |-- Crontab:
+The purpose of the script is to be used on crontab task manager, there you can config how often the script will be executed as follow:
 
 ## Logs 📃
 Logs are useful to know which files was moved and where, this log save original file's path and destiny path join with the date and hour of the operation. 
