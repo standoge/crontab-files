@@ -9,10 +9,13 @@ python3 (py3 on Windows) main.py
 ```
 
 ### Directories:
-The script creates three directories, one for documents, other for images & videos and other for miscellaneous files. 
+The script creates three directories, one for documents, other for images & videos and other for miscellaneous files where can you binary files, jupyter notebooks etc. 
 
 ### Crontab:
 The purpose of the script is to be used on crontab task manager, there you can config how often the script will be executed as follow:
+```bash
+* * * * * python3 ~/your/github/project/path/crontab-files/main.py 
+```
 
 ## Logs 📃
 Logs are useful to know which files was moved and where, this log save original file's path and destiny path join with the date and hour of the operation. 
