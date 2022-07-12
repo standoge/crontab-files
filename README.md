@@ -1,6 +1,6 @@
 # Crontab-task 
 
-It's a script that you can add to your crontab config or Schtask in Windows to filter and move your files, *pdf*, *img*, *others* to different directories. Also for each movement operation it will be saved on a log-file. 
+It's a script that you can add to your crontab config or Schtask on Windows to move files depending its extension. For each move operation a log and snapshot will be saved
 
 ## How to use 💡
 Script will work on the directory that their path are in `WORKSPACE` variable. So, after put your path just execute:
