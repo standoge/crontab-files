@@ -1,5 +1,4 @@
-# File manager 
-
+# File movements script 
 It's a script that you can add to your crontab config or Schtask on Windows to move files depending its extension. For each move operation a log and snapshot will be saved
 
 ## How to use 💡
@@ -14,7 +13,7 @@ The script creates three directories, one for documents, other for images & vide
 ### Crontab:
 The purpose of the script is to be used on crontab task manager, there you can config how often the script will be executed as follow:
 ```bash
-* * * * * python3 ~/your/github/project/path/crontab-files/main.py 
+* * * * * python3 ~/github/project/path/crontab-files/main.py 
 ```
 
 ## Logs 📃
