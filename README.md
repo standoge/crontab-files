@@ -1,4 +1,4 @@
-# Crontab-task 
+# File manager 
 
 It's a script that you can add to your crontab config or Schtask on Windows to move files depending its extension. For each move operation a log and snapshot will be saved
 
