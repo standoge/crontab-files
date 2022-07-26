@@ -4,11 +4,11 @@ import datetime
 
 WORKSPACE = "/home/standoge/Descargas"
 FILES = f"{WORKSPACE}/miscellaneous"
-PDF = f"{WORKSPACE}/pdfs"
+DOCS = f"{WORKSPACE}/pdfs"
 IMGS = f"{WORKSPACE}/images"
 LOGS_PATH = f"{WORKSPACE}/logs"
 SNAPSHOTS = f"{WORKSPACE}/logs/snapshots"
-DOC_PATTERN = re.compile(r"[a-z\ ]*(\.pdf)")
+DOC_PATTERN = re.compile(r"[a-z\ ]*(\.pdf|\.txt|\.docx)")
 IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg|\.mp4)")
 
 
@@ -26,7 +26,7 @@ def directories() -> None:
     os.mkdir(FILES) if not os.path.exists(FILES) else print(
         "Miscellaneous already exist"
     )
-    os.mkdir(PDF) if not os.path.exists(PDF) else print("Pdfs already exist")
+    os.mkdir(DOCS) if not os.path.exists(PDF) else print("Pdfs already exist")
     os.mkdir(IMGS) if not os.path.exists(IMGS) else print("Images already exist")
 
 
@@ -84,7 +84,7 @@ def router(file:object) -> None:
     log_path: str = log()
 
     if re.search(DOC_PATTERN, file.name):
-        rename_log(file.path, file.name, log_path, PDF)
+        rename_log(file.path, file.name, log_path, DOCS)
 
     elif re.search(IMG_PATTERN, file.name):
         rename_log(file.path, file.name, log_path, IMGS)
