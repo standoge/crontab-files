@@ -8,7 +8,7 @@ PDF = f"{WORKSPACE}/pdfs"
 IMGS = f"{WORKSPACE}/images"
 LOGS_PATH = f"{WORKSPACE}/logs"
 SNAPSHOTS = f"{WORKSPACE}/logs/snapshots"
-PDF_PATTERN = re.compile(r"[a-z\ ]*(\.pdf)")
+DOC_PATTERN = re.compile(r"[a-z\ ]*(\.pdf)")
 IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg|\.mp4)")
 
 
@@ -83,7 +83,7 @@ def router(file:object) -> None:
     directories()
     log_path: str = log()
 
-    if re.search(PDF_PATTERN, file.name):
+    if re.search(DOC_PATTERN, file.name):
         rename_log(file.path, file.name, log_path, PDF)
 
     elif re.search(IMG_PATTERN, file.name):
