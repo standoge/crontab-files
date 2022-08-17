@@ -27,7 +27,8 @@ def directories() -> None:
         "Miscellaneous already exist"
     )
     os.mkdir(DOCS) if not os.path.exists(DOCS) else print("Pdfs already exist")
-    os.mkdir(IMGS) if not os.path.exists(IMGS) else print("Images already exist")
+    os.mkdir(IMGS) if not os.path.exists(
+        IMGS) else print("Images already exist")
 
 
 def filter() -> None:
@@ -54,7 +55,7 @@ def log() -> str:
     return logs_file_path
 
 
-def rename_log(file_source:str, file_name:str, logs:str, file_destiny:str) -> None:
+def rename_log(file_source: str, file_name: str, logs: str, file_destiny: str) -> None:
     """
     Using os.rename to move files renaming them and then make a log to have a register
     for the files moved and where was moved also adding date and hours when this was.
@@ -72,7 +73,7 @@ def rename_log(file_source:str, file_name:str, logs:str, file_destiny:str) -> No
     )
 
 
-def router(file:object) -> None:
+def router(file: object) -> None:
     """
     Filter where goes each file using RegExp patterns to know their extension.
 
@@ -100,6 +101,5 @@ def snapshot() -> None:
 
     snapshot_dir: str = os.listdir(f"{WORKSPACE}")
     os.system(
-        f'''echo {snapshot_dir} {datetime.datetime.now()} 
-        >> {SNAPSHOTS}/snapshot-{datetime.date.today()}'''
+        f'''echo {snapshot_dir} {datetime.datetime.now().strftime('%a/ %d/%m/%Y %H:%M:%S')} >> {SNAPSHOTS}/snapshot-{datetime.date.today().strftime('%a/ %d/%m/%Y %H:%M:%S')}'''
     )
