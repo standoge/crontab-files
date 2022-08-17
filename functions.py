@@ -26,7 +26,7 @@ def directories() -> None:
     os.mkdir(FILES) if not os.path.exists(FILES) else print(
         "Miscellaneous already exist"
     )
-    os.mkdir(DOCS) if not os.path.exists(PDF) else print("Pdfs already exist")
+    os.mkdir(DOCS) if not os.path.exists(DOCS) else print("Pdfs already exist")
     os.mkdir(IMGS) if not os.path.exists(IMGS) else print("Images already exist")
 
 
