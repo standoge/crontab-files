@@ -101,5 +101,6 @@ def snapshot() -> None:
 
     snapshot_dir: str = os.listdir(f"{WORKSPACE}")
     os.system(
-        f'''echo {snapshot_dir} {datetime.datetime.now().strftime('%a/ %d/%m/%Y %H:%M:%S')} >> {SNAPSHOTS}/snapshot-{datetime.date.today().strftime('%a/ %d/%m/%Y %H:%M:%S')}'''
+        f'''echo {snapshot_dir} {datetime.datetime.now().strftime('%a/ %d/%m/%Y %H:%M:%S')} 
+        >> {SNAPSHOTS}/snapshot-{datetime.date.today().strftime('%a/ %d/%m/%Y %H:%M:%S')}'''
     )
