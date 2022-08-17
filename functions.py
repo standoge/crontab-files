@@ -69,7 +69,7 @@ def rename_log(file_source: str, file_name: str, logs: str, file_destiny: str) -
 
     os.rename(file_source, file_destiny + "/" + file_name)
     os.system(
-        f"echo {file_source} moved to {file_destiny} >> {logs} {datetime.datetime.now()}"
+        f"echo {file_source} moved to {file_destiny} >> {logs} {datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')}"
     )
 
 
@@ -101,6 +101,6 @@ def snapshot() -> None:
 
     snapshot_dir: str = os.listdir(f"{WORKSPACE}")
     os.system(
-        f'''echo {snapshot_dir} {datetime.datetime.now().strftime('%a/ %d/%m/%Y %H:%M:%S')} 
-        >> {SNAPSHOTS}/snapshot-{datetime.date.today().strftime('%a/ %d/%m/%Y %H:%M:%S')}'''
+        f'''echo {snapshot_dir} {datetime.datetime.now()} 
+        >> {SNAPSHOTS}/snapshot-{datetime.date.today()}'''
     )
