@@ -2,4 +2,8 @@ import pytest
 
 class TestFunctions():
 
-	pass
+	def test_directories():
+		pass
+
+	def test_log():
+		pass
