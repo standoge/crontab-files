@@ -16,11 +16,17 @@ def directories() -> None:
     """Creates directories to move all files that will be filtered in workspace
     path.
     """
-    os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print("Logs directory already exist")
-    os.mkdir(SNAPSHOTS) if not os.path.exists(SNAPSHOTS) else print("SNAPSHOTS directory already exist")
-    os.mkdir(FILES) if not os.path.exists(FILES) else print("FILES directory already exist")
-    os.mkdir(DOCS) if not os.path.exists(DOCS) else print("DOCS directory already exist")
-    os.mkdir(IMGS) if not os.path.exists(IMGS) else print("IMGS directory already exist")
+
+    os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print(
+        "Logs directory already exist")
+    os.mkdir(SNAPSHOTS) if not os.path.exists(SNAPSHOTS) else print(
+        "SNAPSHOTS directory already exist")
+    os.mkdir(FILES) if not os.path.exists(FILES) else print(
+        "FILES directory already exist")
+    os.mkdir(DOCS) if not os.path.exists(DOCS) else print(
+        "DOCS directory already exist")
+    os.mkdir(IMGS) if not os.path.exists(IMGS) else print(
+        "IMGS directory already exist")
 
 def filter() -> None:
     """Filter between files and directories using const WORKSPACE value as path
