@@ -6,10 +6,19 @@ from src.functions import LOGS_PATH, SNAPSHOTS, FILES, DOCS, IMGS
 class TestFunctions():
 
 	def test_log(self):
+		"""Check if log function returns string.
+
+		Returns:
+			string: name of file with logs of the day 
+		"""
+
 		assert type(log()) == str , "log() must return a str"
 		print("log() works")
 
 	def test_directories(self):
+		"""Check if all dirs was created with directories() function.
+		"""
+
 		assert os.path.exists(LOGS_PATH) , "Function doesn't create LOGS_PATH"
 		assert os.path.exists(SNAPSHOTS) , "Function doesn't create SNAPSHOTS"
 		assert os.path.exists(FILES) , "Function doesn't create FILES"
