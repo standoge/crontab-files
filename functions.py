@@ -17,17 +17,20 @@ def directories() -> None:
     path.
     """
 
-    os.mkdir(LOGS_PATH) if not os.path.exists(LOGS_PATH) else print(
-        "Logs directory already exist"
-    )
-    os.mkdir(SNAPSHOTS) if not os.path.exists(SNAPSHOTS) else print(
-        "Snapshot already exist"
-    )
-    os.mkdir(FILES) if not os.path.exists(FILES) else print(
-        "Miscellaneous already exist"
-    )
-    os.mkdir(DOCS) if not os.path.exists(PDF) else print("Pdfs already exist")
-    os.mkdir(IMGS) if not os.path.exists(IMGS) else print("Images already exist")
+    if not os.path.exists(LOGS_PATH):
+        os.mkdir(LOGS_PATH)
+
+    if not os.path.exists(SNAPSHOTS):
+        os.mkdir(SNAPSHOTS)
+
+    if not os.path.exists(FILES):
+        os.mkdir(FILES)
+
+    if not os.path.exists(DOCS):
+        os.mkdir(DOCS)
+
+    if not os.path.exists(IMGS):
+        os.mkdir(IMGS)
 
 
 def filter() -> None:
