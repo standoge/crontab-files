@@ -71,7 +71,7 @@ def rename_log(file_source:str, file_name:str, logs:str, file_destiny:str) -> No
 
     os.rename(file_source, file_destiny + "/" + file_name)
     os.system(
-        f"echo {file_source} moved to {file_destiny} >> {logs} {datetime.datetime.now()}"
+        f"echo {file_source} moved to {file_destiny} >> {logs} {datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')}"
     )
 
 
