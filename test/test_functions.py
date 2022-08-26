@@ -1,7 +1,7 @@
 import pytest
 import os
-from functions import log
-from functions import LOGS_PATH, SNAPSHOTS, FILES, DOCS, IMGS, WORKSPACE
+from src.functions import log
+from src.functions import LOGS_PATH, SNAPSHOTS, FILES, DOCS, IMGS, WORKSPACE
 
 class TestFunctions():
 
