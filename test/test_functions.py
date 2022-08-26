@@ -1,9 +1,8 @@
 import pytest
+from functions import log
 
 class TestFunctions():
 
-	def test_directories():
-		pass
-
 	def test_log():
-		pass
+		assert type(log()) == str , "log() must return a str"
+		print("log() works")
