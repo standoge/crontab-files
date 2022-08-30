@@ -2,7 +2,7 @@ import os
 import re
 import datetime
 
-WORKSPACE = "/home/standoge/Descargas"
+WORKSPACE = "your_workspace_path"
 FILES = f"{WORKSPACE}/miscellaneous"
 DOCS = f"{WORKSPACE}/docs"
 IMGS = f"{WORKSPACE}/images"
@@ -75,12 +75,12 @@ def rename_log(file_source:str, file_name:str, logs:str, file_destiny:str) -> No
     )
 
 
-def router(file:object) -> None:
+def router(file:str) -> None:
     """
-    Filter where goes each file using RegExp patterns to know their extension.
+    Filter where each file goes using RegExp patterns to know their extension.
 
     Parameters:
-        file(object): Output from <scandir> function.
+        file(str): Output from <scandir> function.
     """
 
     directories()
