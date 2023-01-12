@@ -13,7 +13,8 @@ IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg|\.mp4)")
 
 
 def directories() -> None:
-    """Creates directories to move all files that will be filtered in workspace
+    """
+    Creates directories to move all files that will be filtered in workspace
     path.
     """
 
@@ -34,7 +35,8 @@ def directories() -> None:
 
 
 def filter() -> None:
-    """Filter between files and directories using const WORKSPACE value as path
+    """
+    Filter between files and directories using const WORKSPACE value as path
     also this const is used as relative path to make others paths to logs
     and snapshots.
     """
@@ -45,7 +47,8 @@ def filter() -> None:
 
 
 def log() -> str:
-    """Return logs_file_path
+    """
+    Return logs_file_path
     Use it as destiny for each moves operation file creating a directory for logs
     files and also creating these files, each one has the date when was created.
     """
@@ -57,16 +60,16 @@ def log() -> str:
     return logs_file_path
 
 
-def rename_log(file_source:str, file_name:str, logs:str, file_destiny:str) -> None:
+def rename_log(file_source: str, file_name: str, logs: str, file_destiny: str) -> None:
     """
     Using os.rename to move files renaming them and then make a log to have a register
     for the files moved and where was moved also adding date and hours when this was.
 
     Parameters:
-        file_source(str) : file's origin path.
-        file_name(str)   : file's name.
-        logs(str)        : log's file name.
-        file_destiny(str): path where the file would be moved.
+        file_source: file's origin path.
+        file_name: file's name.
+        logs: log's file name.
+        file_destiny: path where the file would be moved.
     """
 
     os.rename(file_source, file_destiny + "/" + file_name)
@@ -75,12 +78,12 @@ def rename_log(file_source:str, file_name:str, logs:str, file_destiny:str) -> No
     )
 
 
-def router(file:str) -> None:
+def router(file: str) -> None:
     """
     Filter where each file goes using RegExp patterns to know their extension.
 
     Parameters:
-        file(str): Output from <scandir> function.
+        file: Output from <scandir> function.
     """
 
     directories()
@@ -97,12 +100,13 @@ def router(file:str) -> None:
 
 
 def snapshot() -> None:
-    """List directories in workspace after the files was moved regarding they extension.
+    """
+    List directories in workspace after the files was moved regarding they extension.
     Then, we can see the state of workspace after to be filtered and cleanned.
     """
 
     snapshot_dir: str = os.listdir(f"{WORKSPACE}")
     os.system(
-        f'''echo {snapshot_dir} {datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')} 
-        >> {SNAPSHOTS}/snapshot-{datetime.date.today()}'''
+        f"""echo {snapshot_dir} {datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')} 
+        >> {SNAPSHOTS}/snapshot-{datetime.date.today()}"""
     )
