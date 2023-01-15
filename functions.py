@@ -17,7 +17,6 @@ def directories() -> None:
     Creates directories to move all files that will be filtered in workspace
     path.
     """
-
     if not os.path.exists(LOGS_PATH):
         os.mkdir(LOGS_PATH)
 
@@ -40,7 +39,6 @@ def filter() -> None:
     also this const is used as relative path to make others paths to logs
     and snapshots.
     """
-
     with os.scandir(WORKSPACE) as sentinel:
         for e in sentinel:
             router(e) if e.is_file() else print(f"dir -> {e.name}")
@@ -52,7 +50,6 @@ def log() -> str:
     Use it as destiny for each moves operation file creating a directory for logs
     files and also creating these files, each one has the date when was created.
     """
-
     logs_file_path: str = f"{LOGS_PATH}/log-{datetime.date.today()}"
     os.system(
         f"cd {LOGS_PATH} && touch log-{datetime.date.today()}"
@@ -71,7 +68,6 @@ def rename_log(file_source: str, file_name: str, logs: str, file_destiny: str) -
         logs: log's file name.
         file_destiny: path where the file would be moved.
     """
-
     os.rename(file_source, file_destiny + "/" + file_name)
     os.system(
         f"echo {file_source} moved to {file_destiny} >> {logs} {datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')}"
@@ -85,7 +81,6 @@ def router(file: str) -> None:
     Parameters:
         file: Output from <scandir> function.
     """
-
     directories()
     log_path: str = log()
 
@@ -104,7 +99,6 @@ def snapshot() -> None:
     List directories in workspace after the files was moved regarding they extension.
     Then, we can see the state of workspace after to be filtered and cleanned.
     """
-
     snapshot_dir: str = os.listdir(f"{WORKSPACE}")
     os.system(
         f"""echo {snapshot_dir} {datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')} 
