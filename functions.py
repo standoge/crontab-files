@@ -20,16 +20,16 @@ def directories() -> None:
     if not os.path.exists(LOGS_PATH):
         os.mkdir(LOGS_PATH)
 
-    if not os.path.exists(SNAPSHOTS):
+    elif not os.path.exists(SNAPSHOTS):
         os.mkdir(SNAPSHOTS)
 
-    if not os.path.exists(FILES):
+    elif not os.path.exists(FILES):
         os.mkdir(FILES)
 
-    if not os.path.exists(DOCS):
+    elif not os.path.exists(DOCS):
         os.mkdir(DOCS)
 
-    if not os.path.exists(IMGS):
+    elif not os.path.exists(IMGS):
         os.mkdir(IMGS)
 
 
@@ -39,9 +39,9 @@ def filter() -> None:
     also this const is used as relative path to make others paths to logs
     and snapshots.
     """
-    with os.scandir(WORKSPACE) as sentinel:
-        for e in sentinel:
-            router(e) if e.is_file() else print(f"dir -> {e.name}")
+    with os.scandir(WORKSPACE) as files:
+        for file in files:
+            router(file) if file.is_file() else print(f"dir -> {file.name}")
 
 
 def log() -> str:

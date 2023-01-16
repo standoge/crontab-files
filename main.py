@@ -1,4 +1,4 @@
-from functions import filter, snapshot
+from .functions import filter, snapshot
 
 
 def main():
