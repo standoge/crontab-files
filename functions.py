@@ -2,7 +2,7 @@ import os
 import re
 import datetime
 
-WORKSPACE = "your_workspace_path"
+WORKSPACE = "your/workspace/path" # For example I use /Downloads
 FILES = f"{WORKSPACE}/miscellaneous"
 DOCS = f"{WORKSPACE}/docs"
 IMGS = f"{WORKSPACE}/images"
@@ -20,16 +20,16 @@ def directories() -> None:
     if not os.path.exists(LOGS_PATH):
         os.mkdir(LOGS_PATH)
 
-    elif not os.path.exists(SNAPSHOTS):
+    if not os.path.exists(SNAPSHOTS):
         os.mkdir(SNAPSHOTS)
 
-    elif not os.path.exists(FILES):
+    if not os.path.exists(FILES):
         os.mkdir(FILES)
 
-    elif not os.path.exists(DOCS):
+    if not os.path.exists(DOCS):
         os.mkdir(DOCS)
 
-    elif not os.path.exists(IMGS):
+    if not os.path.exists(IMGS):
         os.mkdir(IMGS)
 
 
@@ -74,7 +74,7 @@ def rename_log(file_source: str, file_name: str, logs: str, file_destiny: str) -
     )
 
 
-def router(file: str) -> None:
+def router(file) -> None:
     """
     Filter where each file goes using RegExp patterns to know their extension.
 
@@ -99,7 +99,7 @@ def snapshot() -> None:
     List directories in workspace after the files was moved regarding they extension.
     Then, we can see the state of workspace after to be filtered and cleanned.
     """
-    snapshot_dir: str = os.listdir(f"{WORKSPACE}")
+    snapshot_dir: list[str] = os.listdir(f"{WORKSPACE}")
     os.system(
         f"""echo {snapshot_dir} {datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')} 
         >> {SNAPSHOTS}/snapshot-{datetime.date.today()}"""
