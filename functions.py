@@ -10,6 +10,9 @@ LOGS_PATH = f"{WORKSPACE}/logs"
 SNAPSHOTS = f"{WORKSPACE}/logs/snapshots"
 DOC_PATTERN = re.compile(r"[a-z\ ]*(\.pdf|\.txt|\.docx)")
 IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg|\.mp4)")
+FILES_COUNT = 0
+DOCS_COUNT = 0
+IMGS_COUNT = 0
 
 
 def directories() -> None:
@@ -83,14 +86,18 @@ def router(file) -> None:
     """
     directories()
     log_path: str = log()
+    global FILES_COUNT, DOCS_COUNT, IMGS_COUNT
 
     if re.search(DOC_PATTERN, file.name):
+        DOCS_COUNT += 1
         rename_log(file.path, file.name, log_path, DOCS)
 
     elif re.search(IMG_PATTERN, file.name):
+        IMGS_COUNT += 1
         rename_log(file.path, file.name, log_path, IMGS)
 
     else:
+        FILES_COUNT += 1
         rename_log(file.path, file.name, log_path, FILES)
 
 
@@ -104,3 +111,8 @@ def snapshot() -> None:
         f"""echo {snapshot_dir} {datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')} 
         >> {SNAPSHOTS}/snapshot-{datetime.date.today()}"""
     )
+
+def count() -> None:
+    "Count the number of files moved to each directory"
+    global FILES_COUNT, DOCS_COUNT, IMGS_COUNT
+    print(f"Files: [{FILES_COUNT}]", f"Docs: [{DOCS_COUNT}]", f"Images: [{IMGS_COUNT}]", sep="\n")

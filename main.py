@@ -1,4 +1,4 @@
-from functions import filter, snapshot
+from functions import filter, snapshot, count
 
 
 def main():
@@ -9,6 +9,7 @@ def main():
         print("Something was wrong to start, check recollect function")
     finally:
         snapshot()
+        count()
 
 
 if __name__ == "__main__":
