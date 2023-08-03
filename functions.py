@@ -9,10 +9,8 @@ IMGS = f"{WORKSPACE}/images"
 LOGS_PATH = f"{WORKSPACE}/logs"
 SNAPSHOTS = f"{WORKSPACE}/logs/snapshots"
 DOC_PATTERN = re.compile(r"[a-z\ ]*(\.pdf|\.txt|\.docx)")
-IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg|\.mp4)")
-FILES_COUNT = 0
-DOCS_COUNT = 0
-IMGS_COUNT = 0
+IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg|\.webp|\.mp4)")
+DOCS_COUNT, IMGS_COUNT, FILES_COUNT = 0, 0, 0
 
 
 def directories() -> None:
@@ -107,10 +105,10 @@ def snapshot() -> None:
     List directories in workspace after the files was moved regarding they extension.
     Then, we can see the state of workspace after to be filtered and cleanned.
     """
-    snapshot_dir: list[str] = os.listdir(f"{WORKSPACE}")
+    listed_dirs: list[str] = os.listdir(f"{WORKSPACE}")
+    date: str = datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')
     os.system(
-        f"""echo {snapshot_dir} {datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')} 
-        >> {SNAPSHOTS}/snapshot-{datetime.date.today()}"""
+        f"echo {listed_dirs} {date} >> {SNAPSHOTS}/snapshot-{datetime.date.today()}"
     )
 
 
@@ -121,5 +119,6 @@ def count() -> None:
         f"Files: [{FILES_COUNT}]",
         f"Docs: [{DOCS_COUNT}]",
         f"Images: [{IMGS_COUNT}]",
+        f"Check detailed logs at {LOGS_PATH}",
         sep="\n",
     )

@@ -1,14 +1,14 @@
-from functions import filter, snapshot, count
+from functions import filter, count
 
 
 def main():
 
     try:
         filter()
-    except:
+    except Exception as e:
         print("Something was wrong to start, check recollect function")
+        print(e)
     finally:
-        snapshot()
         count()
 
 
