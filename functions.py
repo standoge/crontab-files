@@ -2,7 +2,7 @@ import os
 import re
 import datetime
 
-WORKSPACE = "your/workspace/path" # For example I use /Downloads
+WORKSPACE = "your/workspace/path"  # For example I use /Downloads
 FILES = f"{WORKSPACE}/miscellaneous"
 DOCS = f"{WORKSPACE}/docs"
 IMGS = f"{WORKSPACE}/images"
@@ -44,7 +44,8 @@ def filter() -> None:
     """
     with os.scandir(WORKSPACE) as files:
         for file in files:
-            router(file) if file.is_file() else print(f"dir -> {file.name}")
+            if file.is_file():
+                router(file)
 
 
 def log() -> str:
@@ -54,9 +55,9 @@ def log() -> str:
     files and also creating these files, each one has the date when was created.
     """
     logs_file_path: str = f"{LOGS_PATH}/log-{datetime.date.today()}"
-    os.system(
-        f"cd {LOGS_PATH} && touch log-{datetime.date.today()}"
-    ) if not os.path.exists(logs_file_path) else print("File for logs already exist")
+    if not os.path.exists(logs_file_path):
+        os.system(f"cd {LOGS_PATH} && touch log-{datetime.date.today()}")
+
     return logs_file_path
 
 
@@ -112,7 +113,13 @@ def snapshot() -> None:
         >> {SNAPSHOTS}/snapshot-{datetime.date.today()}"""
     )
 
+
 def count() -> None:
     "Count the number of files moved to each directory"
     global FILES_COUNT, DOCS_COUNT, IMGS_COUNT
-    print(f"Files: [{FILES_COUNT}]", f"Docs: [{DOCS_COUNT}]", f"Images: [{IMGS_COUNT}]", sep="\n")
+    print(
+        f"Files: [{FILES_COUNT}]",
+        f"Docs: [{DOCS_COUNT}]",
+        f"Images: [{IMGS_COUNT}]",
+        sep="\n",
+    )
