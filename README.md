@@ -7,11 +7,8 @@ Script will works on the directory that their path are set in `WORKSPACE` variab
 python3 (py3 on Windows) main.py
 ```
 
-and your files will be moved depending its extension to three diferent directories.
-### Directories:
-The script creates three directories, one for documents, other for images & videos and other for miscellaneous files where can you binary files, jupyter notebooks etc. 
+and your files will be moved depending its extension to three diferent directories. The script will create three directories, one for documents, another for images & videos and one last for miscellaneous files where can you binary files, jupyter notebooks etc. 
 
-### Crontab:
 The purpose of the script is to be used on crontab task manager, there you can config how often the script will be executed as follow:
 ```bash
 * * * * * python3 ~/github/project/path/crontab-files/main.py 
@@ -23,9 +20,6 @@ All logs of day are saved at a same file. This file also have the date when was 
 
 ![](https://i.imgur.com/r2dYfJy.png)
 
-## Snapshots 📷
-It makes a "capture" in workspace path to know how left it after movement operation and which files or directories left. Like a "second prove" to know which files was moved.
-
-![](https://i.imgur.com/eYm7HxR.png)
+----
 
 Enjoy :bamboo:
