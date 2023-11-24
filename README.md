@@ -22,4 +22,4 @@ All logs of day are saved at a same file. This file also have the date when was 
 
 ----
 
-Enjoy :bamboo:
+:bamboo: ~
