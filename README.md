@@ -1,4 +1,4 @@
-# Script to sort files
+# Script to move files
 It's a `Bash` script that you can add to your crontab config or Schtask on Windows to move files depending its extension. For each move operation a log will be saved
 
 ## How to use 💡
