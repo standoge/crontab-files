@@ -1,5 +1,5 @@
-# Sorting files script 
-It's a script that you can add to your crontab config or Schtask on Windows to move files depending its extension. For each move operation a log and snapshot will be saved
+# Script to sort files
+It's a `Bash` script that you can add to your crontab config or Schtask on Windows to move files depending its extension. For each move operation a log will be saved
 
 ## How to use 💡
 Script will works on the directory that their path are set in `WORKSPACE` variable in `functions.py` file. So, after put your path just execute:
