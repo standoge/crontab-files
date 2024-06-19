@@ -13,7 +13,9 @@ and your files will be moved depending its extension to three diferent directori
 Logs are useful to know which files were moved and where, this log saves the original file's path and destiny path join with the date and hour of the operation. 
 All logs of the day are saved at a same file. This file also have the date when was created.
 
-![](https://i.imgur.com/r2dYfJy.png)
+![image](https://i.imgur.com/r2dYfJy.png)
+|:--:|
+| **Output** |
 
 ----
 
