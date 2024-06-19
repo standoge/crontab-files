@@ -8,7 +8,7 @@ DOCS = f"{WORKSPACE}/docs"
 IMGS = f"{WORKSPACE}/images"
 LOGS_PATH = f"{WORKSPACE}/logs"
 SNAPSHOTS = f"{WORKSPACE}/logs/snapshots"
-DOC_PATTERN = re.compile(r"[a-z\ ]*(\.pdf|\.txt|\.docx)")
+DOC_PATTERN = re.compile(r"[a-z\ ]*(\.pdf|\.txt|\.docx|\.xslx)")
 IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg|\.webp|\.mp4|\.gif)")
 DOCS_COUNT, IMGS_COUNT, FILES_COUNT = 0, 0, 0
 
