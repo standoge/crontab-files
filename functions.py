@@ -116,9 +116,11 @@ def count() -> None:
     "Count the number of files moved to each directory"
     global FILES_COUNT, DOCS_COUNT, IMGS_COUNT
     print(
+        "-------------------\n",
         f"Files: [{FILES_COUNT}]",
         f"Docs: [{DOCS_COUNT}]",
         f"Images: [{IMGS_COUNT}]",
         f"Check detailed logs at {LOGS_PATH}",
+        "-------------------\n",
         sep="\n",
     )
