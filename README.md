@@ -4,7 +4,7 @@ It's a `Bash` script that you can add to your crontab config or `Schtask` (Windo
 ## How to use 💡
 Script will works on the directory that their path are set in `WORKSPACE` variable in `functions.py` file. So, after put your path just execute:
 ```python
-python3 (py3 on Windows) main.py
+python3 main.py #py on Windows
 ```
 
 and your files will be moved depending its extension to three diferent directories. The script will create three directories, one for documents, another for images & videos and one last for miscellaneous files (binary files, jupyter notebooks etc). 
