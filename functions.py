@@ -47,6 +47,36 @@ def filter() -> None:
                 router(file)
 
 
+def check_last_day_in_log(log_file_path: str) -> str:
+    """
+    Check the last day separator in the log file to avoid adding duplicates.
+
+    Parameters:
+        log_file_path: Path to the log file
+
+    Returns:
+        The last recorded day in YYYY-MM-DD format or None if no record found
+    """
+    if not os.path.exists(log_file_path) or os.path.getsize(log_file_path) == 0:
+        return None
+
+    try:
+        with open(log_file_path, "r") as f:
+            content = f.read()
+            # Look for day separators in the format: ------ Monday DD/MM/YYYY -------
+            day_separators = re.findall(
+                r"------ \w+ (\d{2}/\d{2}/\d{4}) -------", content
+            )
+            #  DD/MM/YYYY to YYYY-MM-DD
+            if day_separators:
+                last_day = day_separators[-1]
+                day, month, year = last_day.split("/")
+                return f"{year}-{month}-{day}"
+        return None
+    except Exception:
+        return None
+
+
 def log() -> str:
     """
     Return logs_file_path for the current month
@@ -55,13 +85,16 @@ def log() -> str:
     """
     today = datetime.date.today()
     current_month = today.strftime("%Y-%m")  # Format: YYYY-MM
-    logs_file_path: str = f"{LOGS_PATH}/log-{current_month}"
+    logs_file_path: str = f"{LOGS_PATH}/log-{current_month}.txt"
 
     if not os.path.exists(logs_file_path):
-        os.system(f"cd {LOGS_PATH} && touch log-{current_month}")
+        os.system(f"cd {LOGS_PATH} && touch log-{current_month}.txt")
 
     # new day separator
     global CURRENT_DAY
+    if CURRENT_DAY is None:
+        CURRENT_DAY = check_last_day_in_log(logs_file_path)
+
     today_str = today.strftime("%Y-%m-%d")
     if CURRENT_DAY != today_str:
         CURRENT_DAY = today_str
@@ -79,7 +112,8 @@ def add_day_separator(log_file_path: str, date: datetime.date) -> None:
         date: The date to add as separator.
     """
     separator = f"\n------ {date.strftime('%A %d/%m/%Y')} -------\n"
-    os.system(f"echo '{separator}' >> {log_file_path}")
+    with open(log_file_path, "a") as f:
+        f.write(separator)
 
 
 def rename_log(file_source: str, file_name: str, logs: str, file_destiny: str) -> None:
@@ -94,9 +128,10 @@ def rename_log(file_source: str, file_name: str, logs: str, file_destiny: str) -
         file_destiny: path where the file would be moved.
     """
     os.rename(file_source, file_destiny + "/" + file_name)
-    os.system(
-        f"echo {file_source} moved to {file_destiny} >> {logs} {datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')}"
-    )
+
+    log_message = f"{file_source} -> {file_destiny} -- {datetime.datetime.now().strftime('%H:%M')}"
+    with open(logs, "a") as log_file:
+        log_file.write(log_message + "\n")
 
 
 def router(file) -> None:
@@ -131,7 +166,6 @@ def snapshot() -> None:
     listed_dirs: list[str] = os.listdir(f"{WORKSPACE}")
     date: str = datetime.datetime.now().strftime("%a %d/%m/%y %H:%M")
 
-    # Update to use monthly format for snapshots too
     current_month = datetime.date.today().strftime("%Y-%m")
     snapshot_path = f"{SNAPSHOTS}/snapshot-{current_month}"
 
