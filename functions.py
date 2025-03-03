@@ -1,8 +1,8 @@
+import datetime
 import os
 import re
-import datetime
 
-WORKSPACE = "your/workspace/path"  # For example I use /Downloads
+WORKSPACE = "/mnt/c/Users/kevin/Downloads"  # For example I use /Downloads
 FILES = f"{WORKSPACE}/miscellaneous"
 DOCS = f"{WORKSPACE}/docs"
 IMGS = f"{WORKSPACE}/images"
@@ -11,6 +11,7 @@ SNAPSHOTS = f"{WORKSPACE}/logs/snapshots"
 DOC_PATTERN = re.compile(r"[a-z\ ]*(\.pdf|\.txt|\.docx|\.xslx|\.markdown)")
 IMG_PATTERN = re.compile(r"[a-z\ ]*(\.jpg|\.png|\.jpeg|\.webp|\.mp4|\.gif|\.svg)")
 DOCS_COUNT, IMGS_COUNT, FILES_COUNT = 0, 0, 0
+CURRENT_DAY = None
 
 
 def directories() -> None:
@@ -48,15 +49,37 @@ def filter() -> None:
 
 def log() -> str:
     """
-    Return logs_file_path
+    Return logs_file_path for the current month
     Use it as destiny for each moves operation file creating a directory for logs
-    files and also creating these files, each one has the date when was created.
+    files and also creating these files, each one has the month when was created.
     """
-    logs_file_path: str = f"{LOGS_PATH}/log-{datetime.date.today()}"
+    today = datetime.date.today()
+    current_month = today.strftime("%Y-%m")  # Format: YYYY-MM
+    logs_file_path: str = f"{LOGS_PATH}/log-{current_month}"
+
     if not os.path.exists(logs_file_path):
-        os.system(f"cd {LOGS_PATH} && touch log-{datetime.date.today()}")
+        os.system(f"cd {LOGS_PATH} && touch log-{current_month}")
+
+    # new day separator
+    global CURRENT_DAY
+    today_str = today.strftime("%Y-%m-%d")
+    if CURRENT_DAY != today_str:
+        CURRENT_DAY = today_str
+        add_day_separator(logs_file_path, today)
 
     return logs_file_path
+
+
+def add_day_separator(log_file_path: str, date: datetime.date) -> None:
+    """
+    Add a separator for a new day in the monthly log file.
+
+    Parameters:
+        log_file_path: Path to the monthly log file.
+        date: The date to add as separator.
+    """
+    separator = f"\n------ {date.strftime('%A %d/%m/%Y')} -------\n"
+    os.system(f"echo '{separator}' >> {log_file_path}")
 
 
 def rename_log(file_source: str, file_name: str, logs: str, file_destiny: str) -> None:
@@ -106,10 +129,17 @@ def snapshot() -> None:
     Then, we can see the state of workspace after to be filtered and cleanned.
     """
     listed_dirs: list[str] = os.listdir(f"{WORKSPACE}")
-    date: str = datetime.datetime.now().strftime('%a %d/%m/%y %H:%M')
-    os.system(
-        f"echo {listed_dirs} {date} >> {SNAPSHOTS}/snapshot-{datetime.date.today()}"
-    )
+    date: str = datetime.datetime.now().strftime("%a %d/%m/%y %H:%M")
+
+    # Update to use monthly format for snapshots too
+    current_month = datetime.date.today().strftime("%Y-%m")
+    snapshot_path = f"{SNAPSHOTS}/snapshot-{current_month}"
+
+    if not os.path.exists(snapshot_path):
+        today_str = datetime.date.today().strftime("%A %d/%m/%Y")
+        os.system(f"echo '\n------ {today_str} -------\n' > {snapshot_path}")
+
+    os.system(f"echo {listed_dirs} {date} >> {snapshot_path}")
 
 
 def count() -> None:
